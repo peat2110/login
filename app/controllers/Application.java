@@ -9,6 +9,7 @@ import static play.data.Form.*;
 
 public class Application extends Controller {
 
+    @Security.Authenticated(Secured.class)
     public static Result index() {
         return ok(index.render(Project.find.all(),Task.find.all()));
     }
@@ -28,6 +29,14 @@ public class Application extends Controller {
 	            routes.Application.index()
 	        );
     	}
+	}
+
+	public static Result logout() {
+	    session().clear();
+	    flash("success", "You've been logged out");
+	    return redirect(
+	        routes.Application.login()
+	    );
 	}
 
 	public static class Login {
