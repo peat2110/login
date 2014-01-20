@@ -1,0 +1,10 @@
+@(projects: List[Project], todoTasks: List[Task])
+
+@for(project <- projects){
+	<h3>@project.name</h3>
+	@for(task <- todoTasks) {
+		@if(project.id == task.project.id) {
+			<span>@task.title</span>
+		}
+	}
+}
